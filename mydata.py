@@ -28,6 +28,16 @@ class Tools():
         connect.close()
         return data_list
 
+    # 新增数据的数据库操作
+    @staticmethod
+    def addData(account, pwd, comment):
+        connect = pymysql.connect(host='192.168.1.137',port=3306,user='mail_user',password='ah7032',database='mail_db')
+        c = connect.cursor()
+        command = "insert into users values(null,'%s','%s','%s')" % (account, pwd, comment)
+        c.execute(command)
+        connect.commit()
+        connect.close()
+
     # 删除数据的数据库操作
     @staticmethod
     def delData():

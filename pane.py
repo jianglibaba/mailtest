@@ -1,8 +1,46 @@
 import sys
 from PyQt5.Qt import *
+#导入主窗口页面ui的py文件
 from resouce.pane_ui import Ui_Form
+#导入数据库处理文件
 from mydata import *
+#导入注册页面ui的py文件
+from resouce.register_ui import Ui_Dialog
 
+
+#注册页面
+class RegisterPane(QDialog,Ui_Dialog):
+
+
+    def __init__(self,parent=None,*args,**kwargs):
+        super().__init__(parent,*args,**kwargs)
+        self.setupUi(self)
+
+    def ok_slot(self):
+        # 如果每个输入项都不为空的表示输入正确
+        if self.account_le.text() != '' and self.pwd_le.text() != '' and self.comment_le.text() != '':
+            # 关闭窗口
+            self.close()
+            # 在数据库中新增字段
+            Tools.addData(self.account_le.text(), self.pwd_le.text(), self.comment_le.text())
+
+            # 提示新增成功
+            self.showHint('新增成功')
+        else:
+            self.showHint('必填项不能为空')
+
+    def reset_slot(self):
+        self.account_le.clear()
+        self.pwd_le.clear()
+        self.comment_le.clear()
+
+    def showHint(self, message):
+
+        hint_msg = QMessageBox()
+        hint_msg.setText(message)
+        hint_msg.addButton(QMessageBox.Ok)
+        hint_msg.setWindowTitle("提示")
+        hint_msg.exec_()
 
 #主窗口页面
 class MailPane(QWidget,Ui_Form):
@@ -12,6 +50,9 @@ class MailPane(QWidget,Ui_Form):
 
         # 初始化表格
         self.initTable()
+
+        #实例化注册页面类
+        self.my_dialog = RegisterPane()
 
 
     def initTable(self):
@@ -54,7 +95,11 @@ class MailPane(QWidget,Ui_Form):
             self.sql_tw.setItem(index, 2, QTableWidgetItem(data_list[index][2]))
             self.sql_tw.setItem(index, 3, QTableWidgetItem(data_list[index][3]))
 
-
+    # 弹出注册窗口
+    def register_slot(self):
+        self.my_dialog.exec_()
+        # 添加数据后，刷新主窗口页面
+        self.flushTable()
 
 
 if __name__ == "__main__":
