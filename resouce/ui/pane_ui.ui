@@ -62,7 +62,7 @@
     <string>暂停账号</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="changepwd_btn">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -155,11 +155,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>changepwd_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>changepwd_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>548</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>687</x>
+     <y>228</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>register_slot()</slot>
   <slot>del_slot()</slot>
   <slot>pause_slot()</slot>
   <slot>save_slot()</slot>
+  <slot>changepwd_slot()</slot>
  </slots>
 </ui>

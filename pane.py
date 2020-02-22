@@ -6,6 +6,28 @@ from resouce.pane_ui import Ui_Form
 from mydata import *
 #导入注册页面ui的py文件
 from resouce.register_ui import Ui_Dialog
+from resouce.changepwd_ui import New_Pwd
+
+
+#注册页面
+class New_Pwd(QDialog,New_Pwd):
+
+
+    def __init__(self,parent=None,*args,**kwargs):
+        super().__init__(parent,*args,**kwargs)
+        self.setupUi(self)
+
+
+
+    def newpwd_slot(self):
+        #暂时没做出来
+        pass
+
+
+    def resetpwd_slot(self):
+        self.newpwd_btn.clear()
+        self.repeat_btn.clear()
+
 
 
 #注册页面
@@ -53,6 +75,8 @@ class MailPane(QWidget,Ui_Form):
 
         #实例化注册页面类
         self.my_dialog = RegisterPane()
+
+        self.my_newpwd = New_Pwd()
 
 
     def initTable(self):
@@ -171,6 +195,7 @@ class MailPane(QWidget,Ui_Form):
             # 如果没有选中改行时，点击编辑，弹出提示框
             self.my_dialog.showHint("请选中一行进行编辑")
 
+    #暂停账户的槽函数
     def pauseDialog(self):
         editDialog = QDialog(self)
         editDialog.setWindowTitle(u'编辑')
@@ -205,11 +230,13 @@ class MailPane(QWidget,Ui_Form):
         # 否则返回False
         return False
 
-    # 保存为csv
+    # 保存为csv文件的槽函数
     def save_slot(self):
         Tools.saveData()
 
-
+    #修改密码的槽函数
+    def changepwd_slot(self):
+        pass
 
 if __name__ == "__main__":
 
