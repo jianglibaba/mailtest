@@ -1,6 +1,5 @@
 import pymysql
-
-#import pandas as pd
+import pandas as pd
 #import os
 
 class Tools():
@@ -40,18 +39,33 @@ class Tools():
 
     # 删除数据的数据库操作
     @staticmethod
-    def delData():
-        # 打开数据库连接
+    def delData(id):
         connect = pymysql.connect("192.168.1.137", "mail_user", "ah7032", 'mail_db')
-        # 使用cursor()方法创建一个游标对象c
         c = connect.cursor()
-        # 使用execute()方法执行SQL语句
-
-
-        command = "delete from mydata where id = 1"
+        command = "delete from users where id = %s" % id
         c.execute(command)
         connect.commit()
         connect.close()
+
+     # 编辑数据的数据库操作（设comment为0，暂停账户）
+    @staticmethod
+    def pauseData(id):
+        connect = pymysql.connect("192.168.1.137", "mail_user", "ah7032", 'mail_db')
+        c = connect.cursor()
+        command = "update users set comment = 0 where id = %s" % id
+        c.execute(command)
+        connect.commit()
+        connect.close()
+
+    # 保存为csv文件
+    @staticmethod
+    def saveData():
+            connect = pymysql.connect("192.168.1.137", "mail_user", "ah7032", 'mail_db')
+            command = "SELECT * FROM users"
+
+            df = pd.read_sql(command, con=connect)
+            df.to_csv("data.csv")
+            connect.close()
 
 
 

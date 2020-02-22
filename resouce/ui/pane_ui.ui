@@ -36,7 +36,7 @@
     <string>注册账号</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="del_btn">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -49,7 +49,7 @@
     <string>删除账号</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="pause_btn">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -75,7 +75,7 @@
     <string>修改密码</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="save_btn">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -107,8 +107,59 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>del_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>del_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>112</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>667</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pause_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>pause_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>568</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>650</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>save_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>save_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>register_slot()</slot>
+  <slot>del_slot()</slot>
+  <slot>pause_slot()</slot>
+  <slot>save_slot()</slot>
  </slots>
 </ui>

@@ -95,11 +95,120 @@ class MailPane(QWidget,Ui_Form):
             self.sql_tw.setItem(index, 2, QTableWidgetItem(data_list[index][2]))
             self.sql_tw.setItem(index, 3, QTableWidgetItem(data_list[index][3]))
 
-    # 弹出注册窗口
+    #弹出注册窗口注册槽函数
     def register_slot(self):
         self.my_dialog.exec_()
         # 添加数据后，刷新主窗口页面
         self.flushTable()
+
+    #删除数据槽函数
+    def del_slot(self):
+        # 选中某行
+        selected_row = self.sql_tw.selectedItems()
+        if len(selected_row) == 3:
+
+            del_row = self.sql_tw.row(selected_row[0])
+            id = self.sql_tw.item(del_row, 0).text()
+
+            # 如果返回值为True，表示点击了确定删除
+            if self.delDialog() == True:
+                Tools.delData(id)
+                self.flushTable()
+
+        else:
+            # 如果没有选中改行时，点击编辑，弹出提示框
+            self.my_dialog.showHint("请选中一行进行删除")
+
+    def delDialog(self):
+        delDialog = QDialog(self)
+        delDialog.setWindowTitle(u'删除')
+        group = QGroupBox('', delDialog)
+        lb1 = QLabel(u'确定删除吗?删除后无法恢复')
+
+        ok_button = QPushButton(u'确定', delDialog)
+        cancel_button = QPushButton(u'取消', delDialog)
+
+        ok_button.clicked.connect(delDialog.accept)
+        ok_button.setDefault(True)
+        cancel_button.clicked.connect(delDialog.reject)
+        group_layout = QVBoxLayout()
+        group_item = [lb1]
+        for item in group_item:
+            group_layout.addWidget(item)
+        group.setLayout(group_layout)
+        group.setFixedSize(group.sizeHint())
+
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(ok_button)
+        button_layout.addWidget(cancel_button)
+        dialog_layout = QVBoxLayout()
+        dialog_layout.addWidget(group)
+        dialog_layout.addLayout(button_layout)
+        delDialog.setLayout(dialog_layout)
+        delDialog.setFixedSize(delDialog.sizeHint())
+
+        # 当点击ok是，表示确定删除返回True
+        if delDialog.exec_():
+            return True
+        # 否则返回False
+        return False
+
+    # 弹出编辑窗口
+    def pause_slot(self):
+        # 选中某行
+        selected_row = self.sql_tw.selectedItems()
+        if len(selected_row) == 3:
+
+            del_row = self.sql_tw.row(selected_row[0])
+            id = self.sql_tw.item(del_row, 0).text()
+
+            # 如果返回值为True，表示点击了确定编辑
+            if self.pauseDialog() == True:
+                Tools.pauseData(id)
+                self.flushTable()
+
+        else:
+            # 如果没有选中改行时，点击编辑，弹出提示框
+            self.my_dialog.showHint("请选中一行进行编辑")
+
+    def pauseDialog(self):
+        editDialog = QDialog(self)
+        editDialog.setWindowTitle(u'编辑')
+        group = QGroupBox('', editDialog)
+        lb1 = QLabel(u'确定暂停吗?')
+
+        ok_button = QPushButton(u'确定', editDialog)
+        cancel_button = QPushButton(u'取消', editDialog)
+
+        ok_button.clicked.connect(editDialog.accept)
+        ok_button.setDefault(True)
+        cancel_button.clicked.connect(editDialog.reject)
+        group_layout = QVBoxLayout()
+        group_item = [lb1]
+        for item in group_item:
+            group_layout.addWidget(item)
+        group.setLayout(group_layout)
+        group.setFixedSize(group.sizeHint())
+
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(ok_button)
+        button_layout.addWidget(cancel_button)
+        dialog_layout = QVBoxLayout()
+        dialog_layout.addWidget(group)
+        dialog_layout.addLayout(button_layout)
+        editDialog.setLayout(dialog_layout)
+        editDialog.setFixedSize(editDialog.sizeHint())
+
+        # 当点击ok是，表示确定删除返回True
+        if editDialog.exec_():
+            return True
+        # 否则返回False
+        return False
+
+    # 保存为csv
+    def save_slot(self):
+        Tools.saveData()
+
 
 
 if __name__ == "__main__":
