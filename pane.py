@@ -6,27 +6,7 @@ from resouce.pane_ui import Ui_Form
 from mydata import *
 #导入注册页面ui的py文件
 from resouce.register_ui import Ui_Dialog
-from resouce.changepwd_ui import New_Pwd
 
-
-#注册页面
-class New_Pwd(QDialog,New_Pwd):
-
-
-    def __init__(self,parent=None,*args,**kwargs):
-        super().__init__(parent,*args,**kwargs)
-        self.setupUi(self)
-
-
-
-    def newpwd_slot(self):
-        #暂时没做出来
-        pass
-
-
-    def resetpwd_slot(self):
-        self.newpwd_btn.clear()
-        self.repeat_btn.clear()
 
 
 
@@ -66,6 +46,9 @@ class RegisterPane(QDialog,Ui_Dialog):
 
 #主窗口页面
 class MailPane(QWidget,Ui_Form):
+
+    newpwd_signal = pyqtSignal(str)
+
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.setupUi(self)
@@ -75,8 +58,6 @@ class MailPane(QWidget,Ui_Form):
 
         #实例化注册页面类
         self.my_dialog = RegisterPane()
-
-        self.my_newpwd = New_Pwd()
 
 
     def initTable(self):
@@ -234,9 +215,67 @@ class MailPane(QWidget,Ui_Form):
     def save_slot(self):
         Tools.saveData()
 
+
     #修改密码的槽函数
     def changepwd_slot(self):
-        pass
+
+
+
+        selected_row = self.sql_tw.selectedItems()
+        if len(selected_row) == 3:
+
+            del_row = self.sql_tw.row(selected_row[0])
+            id = self.sql_tw.item(del_row, 0).text()
+
+            # 如果返回值为True，表示点击了确定编辑
+            if self.pauseDialog() == True:
+                self.newpwd_signal.emit(id)
+
+
+        else:
+            # 如果没有选中改行时，点击编辑，弹出提示框
+            self.my_dialog.showHint("请选中一行进行编辑")
+
+        # 暂停账户的槽函数
+
+    def pauseDialog(self):
+        editDialog = QDialog(self)
+        editDialog.setWindowTitle(u'编辑')
+        group = QGroupBox('', editDialog)
+        lb1 = QLabel(u'确定暂停吗?')
+
+        ok_button = QPushButton(u'确定', editDialog)
+        cancel_button = QPushButton(u'取消', editDialog)
+
+        ok_button.clicked.connect(editDialog.accept)
+        ok_button.setDefault(True)
+        cancel_button.clicked.connect(editDialog.reject)
+        group_layout = QVBoxLayout()
+        group_item = [lb1]
+        for item in group_item:
+            group_layout.addWidget(item)
+        group.setLayout(group_layout)
+        group.setFixedSize(group.sizeHint())
+
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(ok_button)
+        button_layout.addWidget(cancel_button)
+        dialog_layout = QVBoxLayout()
+        dialog_layout.addWidget(group)
+        dialog_layout.addLayout(button_layout)
+        editDialog.setLayout(dialog_layout)
+        editDialog.setFixedSize(editDialog.sizeHint())
+
+        # 当点击ok是，表示确定删除返回True
+        if editDialog.exec_():
+            return True
+        # 否则返回False
+        return False
+
+
+
+
+
 
 if __name__ == "__main__":
 

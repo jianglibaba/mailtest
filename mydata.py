@@ -69,7 +69,7 @@ class Tools():
 
     #修改密码
     @staticmethod
-    def changepwd(newwpwd,id):
+    def changepwd(id,newwpwd):
         connect = pymysql.connect("192.168.1.137", "mail_user", "ah7032", 'mail_db')
         c = connect.cursor()
         command = "update users set password = %s where id = %s" % (newwpwd,id)
