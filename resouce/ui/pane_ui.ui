@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
-    <height>636</height>
+    <width>727</width>
+    <height>710</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,16 +18,16 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>471</width>
-     <height>611</height>
+     <width>571</width>
+     <height>691</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="register_btn">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>40</y>
+     <x>610</x>
+     <y>20</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -39,8 +39,8 @@
   <widget class="QPushButton" name="del_btn">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>100</y>
+     <x>610</x>
+     <y>80</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -52,8 +52,8 @@
   <widget class="QPushButton" name="pause_btn">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>160</y>
+     <x>610</x>
+     <y>140</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -65,8 +65,8 @@
   <widget class="QPushButton" name="changepwd_btn">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>220</y>
+     <x>610</x>
+     <y>320</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -78,14 +78,27 @@
   <widget class="QPushButton" name="save_btn">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>280</y>
+     <x>610</x>
+     <y>260</y>
      <width>91</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>保存通讯录</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="enable_btn">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>200</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>启用账号</string>
    </property>
   </widget>
  </widget>
@@ -162,12 +175,28 @@
    <slot>changepwd_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>548</x>
-     <y>232</y>
+     <x>610</x>
+     <y>350</y>
     </hint>
     <hint type="destinationlabel">
      <x>687</x>
      <y>228</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enable_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>enable_slot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>655</x>
+     <y>213</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>216</y>
     </hint>
    </hints>
   </connection>
@@ -178,5 +207,6 @@
   <slot>pause_slot()</slot>
   <slot>save_slot()</slot>
   <slot>changepwd_slot()</slot>
+  <slot>enable_slot()</slot>
  </slots>
 </ui>

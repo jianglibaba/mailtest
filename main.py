@@ -1,12 +1,14 @@
-import sys
 from PyQt5.Qt import *
+#导入主窗口文件
 from pane import *
+#导入修改密码窗口文件
 from newpwd import *
+#导入数据库处理文件
 from mydata import *
 
 
 if __name__ == "__main__":
-
+    import sys
     app = QApplication(sys.argv)
 
     mail = MailPane()
@@ -18,24 +20,16 @@ if __name__ == "__main__":
         my_newpwd.exec_()
 
     def change_pwd(text):
-        a =text
-        b = newid
-        print(a)
-        print(b)
-        Tools.changepwd(b,a)
+        a = newid
+        b = text
+        Tools.changepwd(a,b)
         mail.flushTable()
-
-
-
-
-
-
 
     mail.newpwd_signal.connect(show_newpwd)
 
     my_newpwd.newpwd_signal.connect(change_pwd)
 
-
     mail.show()
+
     sys.exit(app.exec_())
 
