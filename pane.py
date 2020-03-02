@@ -13,17 +13,22 @@ from resouce.register_ui import Ui_Dialog
 #注册页面
 class RegisterPane(QDialog,Ui_Dialog):
 
-    def __init__(self,parent=None,*args,**kwargs):
-        super().__init__(parent,*args,**kwargs)
+    def __init__(self, parent=None, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
         self.setupUi(self)
 
     def ok_slot(self):
+        enable = self.enable_cb.currentText()
+        if enable == "启用":
+            enable_id = 1
+        else:
+            enable_id = 0
         # 如果每个输入项都不为空的表示输入正确
-        if self.account_le.text() != '' and self.pwd_le.text() != '' and self.comment_le.text() != '' and self.dep_le.text() != '' and self.who_le.text() != '':
+        if self.account_le.text() != '' and self.pwd_le.text() != '' and self.dep_le.text() != '' and self.who_le.text() != '':
             # 关闭窗口
             self.close()
             # 在数据库中新增字段
-            Tools.addData(self.account_le.text(), self.pwd_le.text(), self.comment_le.text(),self.dep_le.text(),self.who_le.text())
+            Tools.addData(self.account_le.text(), self.pwd_le.text(), enable_id, self.dep_le.text(), self.who_le.text())
 
             # 提示新增成功
             self.showHint('新增成功')

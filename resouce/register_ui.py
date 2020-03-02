@@ -29,9 +29,6 @@ class Ui_Dialog(object):
         self.pwd_le = QtWidgets.QLineEdit(Dialog)
         self.pwd_le.setGeometry(QtCore.QRect(130, 80, 171, 20))
         self.pwd_le.setObjectName("pwd_le")
-        self.comment_le = QtWidgets.QLineEdit(Dialog)
-        self.comment_le.setGeometry(QtCore.QRect(130, 120, 171, 20))
-        self.comment_le.setObjectName("comment_le")
         self.ok_btn = QtWidgets.QPushButton(Dialog)
         self.ok_btn.setGeometry(QtCore.QRect(60, 280, 75, 23))
         self.ok_btn.setObjectName("ok_btn")
@@ -50,6 +47,11 @@ class Ui_Dialog(object):
         self.who_le = QtWidgets.QLineEdit(Dialog)
         self.who_le.setGeometry(QtCore.QRect(130, 200, 171, 20))
         self.who_le.setObjectName("who_le")
+        self.enable_cb = QtWidgets.QComboBox(Dialog)
+        self.enable_cb.setGeometry(QtCore.QRect(130, 120, 171, 22))
+        self.enable_cb.setObjectName("enable_cb")
+        self.enable_cb.addItem("")
+        self.enable_cb.addItem("")
 
         self.retranslateUi(Dialog)
         self.ok_btn.clicked.connect(Dialog.ok_slot)
@@ -66,6 +68,8 @@ class Ui_Dialog(object):
         self.reset_btn.setText(_translate("Dialog", "重置"))
         self.label_4.setText(_translate("Dialog", "部门："))
         self.label_5.setText(_translate("Dialog", "备注："))
+        self.enable_cb.setItemText(0, _translate("Dialog", "启用"))
+        self.enable_cb.setItemText(1, _translate("Dialog", "暂停"))
 
 
 if __name__ == "__main__":

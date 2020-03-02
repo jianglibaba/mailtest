@@ -9,7 +9,7 @@ class Tools():
     @staticmethod
     def getData():
         # 打开数据库连接
-        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xuchao',password='hfDSt130-=',database='mail')
+        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xxx',password='hfDSt130-=',database='mail')
         # 使用cursor()方法创建一个游标对象c
         c = connect.cursor()
         # 使用execute()方法执行SQL语句
@@ -33,7 +33,7 @@ class Tools():
     @staticmethod
     def redData():
         # 打开数据库连接
-        connect = pymysql.connect(host='192.168.2.6', port=3306, user='xuchao', password='hfDSt130-=', database='mail')
+        connect = pymysql.connect(host='192.168.2.6', port=3306, user='xxx', password='hfDSt130-=', database='mail')
         # 使用cursor()方法创建一个游标对象c
         c = connect.cursor()
         # 使用execute()方法执行SQL语句
@@ -66,7 +66,7 @@ class Tools():
     # 新增数据的数据库操作
     @staticmethod
     def addData(account, pwd, comment, dep, who):
-        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xuchao',password='hfDSt130-=',database='mail')
+        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xxx',password='hfDSt130-=',database='mail')
         c = connect.cursor()
         command = "insert into users values('%s','%s','%s','%s','%s')" % (account, pwd, comment, dep, who)
         c.execute(command)
@@ -76,7 +76,7 @@ class Tools():
     # 删除数据的数据库操作
     @staticmethod
     def delData(id):
-        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xuchao',password='hfDSt130-=',database='mail')
+        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xxx',password='hfDSt130-=',database='mail')
         c = connect.cursor()
         command = 'delete from users where email = "%s"' % id
         c.execute(command)
@@ -86,7 +86,7 @@ class Tools():
     # 编辑数据的数据库操作（设comment为0，暂停账户）
     @staticmethod
     def pauseData(id):
-        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xuchao',password='hfDSt130-=',database='mail')
+        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xxx',password='hfDSt130-=',database='mail')
         c = connect.cursor()
         command = 'update users set enable = 0 where email = "%s"' % id
         c.execute(command)
@@ -96,7 +96,7 @@ class Tools():
     # 编辑数据的数据库操作（设comment为1，启用账户）
     @staticmethod
     def enableData(id):
-        connect = pymysql.connect(host='192.168.2.6', port=3306, user='xuchao', password='hfDSt130-=', database='mail')
+        connect = pymysql.connect(host='192.168.2.6', port=3306, user='xxx', password='hfDSt130-=', database='mail')
         c = connect.cursor()
         command = 'update users set enable = 1 where email = "%s"' % id
         c.execute(command)
@@ -106,7 +106,7 @@ class Tools():
     # 保存为csv文件
     @staticmethod
     def saveData():
-            connect = pymysql.connect(host='192.168.2.6',port=3306,user='xuchao',password='hfDSt130-=',database='mail')
+            connect = pymysql.connect(host='192.168.2.6',port=3306,user='xxx',password='hfDSt130-=',database='mail')
 
             # 使用cursor()方法创建一个游标对象c
             c = connect.cursor()
@@ -135,7 +135,7 @@ class Tools():
     #修改密码
     @staticmethod
     def changepwd(id,newwpwd):
-        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xuchao',password='hfDSt130-=',database='mail')
+        connect = pymysql.connect(host='192.168.2.6',port=3306,user='xxx',password='hfDSt130-=',database='mail')
         c = connect.cursor()
         command = 'update users set password = "%s" where email = "%s"' % (newwpwd,id)
         c.execute(command)

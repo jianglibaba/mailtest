@@ -72,16 +72,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="comment_le">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>120</y>
-     <width>171</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="ok_btn">
    <property name="geometry">
     <rect>
@@ -153,6 +143,26 @@
      <height>20</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QComboBox" name="enable_cb">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>120</y>
+     <width>171</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>启用</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>暂停</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
